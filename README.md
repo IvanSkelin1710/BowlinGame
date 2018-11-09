@@ -1,4 +1,4 @@
-# BowlinGame
+# Bowling Game
 DiUS is starting a bowling club. To help with the club, we have engaged you to program a scoring system.
 
 The features on the system are:
