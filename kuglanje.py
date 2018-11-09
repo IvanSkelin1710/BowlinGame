@@ -1,9 +1,12 @@
+import sys
+sys.version
+
 class Frame:
 
     isSpare = False
     isStrike = False
     
-    def __init__(self):
+    def __init__(self):#Sets the value of the rolls to -1 to indicate that the ball has not been thrown
         self.roll = [-1, -1]
 
     def frametype(self): #check if the frame was a spare, strike or normal
@@ -39,9 +42,9 @@ class Bowling:
             return True
 
     def score(self, currFrame, prevFrame, i): #scores the frame
-        if(i == 0):
+        if(i == 0):#scoring for the first frame
             return currFrame.roll[0] + currFrame.roll[1]
-        if(prevFrame.isStrike and currFrame.isStrike):
+        if(prevFrame.isStrike and currFrame.isStrike):#handles what happens if you roll multiple strikes in a row
             if (i == 1):
                 return 20
             if (i > 1):
@@ -58,18 +61,18 @@ class Bowling:
         currentscore = 0
         i = 0
 
-        while (i<10):
+        while (i<10):#roll input
             print("Frame" + str(i+1) + ":")
-            self.frames[i].roll[0] = input('Roll 1:')
-            if (self.frames[i].roll[0] == 10):
+
+            self.frames[i].roll[0] = raw_input('Roll 1:')
+            if (self.frames[i].roll[0] == 10):#Handles if the strike happens on the first roll
                 self.frames[i].roll[1] = 0
                 self.frames[i].frametype()
                 currentscore = currentscore + self.score(self.frames[i],self.frames[i-1], i)
                 print("Your current score is: " + str(currentscore))
                 i = i + 1
                 continue;
-            self.frames[i].roll[1] = input('Roll 2:')
-            
+            self.frames[i].roll[1] = raw_input('Roll 2:')
             if(self.rollCheck(self.frames[i].roll[0], self.frames[i].roll[1])):
                  self.frames[i].frametype()
                  currentscore = currentscore + self.score(self.frames[i],self.frames[i-1], i)
@@ -82,7 +85,6 @@ class Bowling:
 
 newGame = Bowling()
 newGame.game()
-
 
 
 
