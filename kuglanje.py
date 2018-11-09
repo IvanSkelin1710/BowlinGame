@@ -1,6 +1,3 @@
-import sys
-sys.version
-
 class Frame:
 
     isSpare = False
@@ -63,8 +60,12 @@ class Bowling:
 
         while (i<10):#roll input
             print("Frame" + str(i+1) + ":")
-
-            self.frames[i].roll[0] = raw_input('Roll 1:')
+            while True:
+                try:
+                    self.frames[i].roll[0] = int(raw_input('Roll 1:'))
+                    break
+                except ValueError:
+                    print("Wrong input please try again")
             if (self.frames[i].roll[0] == 10):#Handles if the strike happens on the first roll
                 self.frames[i].roll[1] = 0
                 self.frames[i].frametype()
@@ -72,7 +73,12 @@ class Bowling:
                 print("Your current score is: " + str(currentscore))
                 i = i + 1
                 continue;
-            self.frames[i].roll[1] = raw_input('Roll 2:')
+            while True:
+                try:
+                    self.frames[i].roll[1] = int(raw_input('Roll 2:'))
+                    break
+                except ValueError:
+                    print("Wrong input please try again")
             if(self.rollCheck(self.frames[i].roll[0], self.frames[i].roll[1])):
                  self.frames[i].frametype()
                  currentscore = currentscore + self.score(self.frames[i],self.frames[i-1], i)
@@ -85,7 +91,3 @@ class Bowling:
 
 newGame = Bowling()
 newGame.game()
-
-
-
-
